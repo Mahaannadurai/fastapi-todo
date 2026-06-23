@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+
 from app.models import Todo
 
 router = APIRouter(
@@ -42,3 +42,10 @@ def complete_todo(todo_id: int):
             todo.completed = True
             return todo
     raise HTTPException(status_code=404, detail="Todo not found")
+@router.get("/search/")
+def search_todos(title: str):
+    results = [
+        todo for todo in todos
+        if title.lower() in todo.title.lower()
+    ]
+    return results
