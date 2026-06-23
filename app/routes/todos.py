@@ -34,3 +34,11 @@ def delete_todo(todo_id: int):
     global todos
     todos = [todo for todo in todos if todo.id != todo_id]
     return {"message": "Todo deleted"}
+
+@router.patch("/{todo_id}/complete")
+def complete_todo(todo_id: int):
+    for todo in todos:
+        if todo.id == todo_id:
+            todo.completed = True
+            return todo
+    raise HTTPException(status_code=404, detail="Todo not found")
