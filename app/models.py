@@ -6,3 +6,4 @@ class Todo(BaseModel):
     title: str
     completed: bool = False
     description: str = ""
+    priority: int = 1
