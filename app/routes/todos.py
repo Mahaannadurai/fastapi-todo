@@ -49,3 +49,6 @@ def search_todos(title: str):
         if title.lower() in todo.title.lower()
     ]
     return results
+@router.get("/completed/")
+def get_completed_todos():
+    return [todo for todo in todos if todo.completed]
