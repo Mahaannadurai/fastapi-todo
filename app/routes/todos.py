@@ -52,3 +52,13 @@ def search_todos(title: str):
 @router.get("/completed/")
 def get_completed_todos():
     return [todo for todo in todos if todo.completed]
+@router.get("/stats/")
+def get_stats():
+    total = len(todos)
+    completed = len([t for t in todos if t.completed])
+    pending = total - completed
+    return {
+        "total": total,
+        "completed": completed,
+        "pending": pending
+    }
